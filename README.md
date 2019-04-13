@@ -115,7 +115,7 @@ SUCCESFUL RES: {
     jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 }
 
-[POST]
+[POST] /api/login
 The following body should be passed: 
 {
     email: 'gabcab@gmail.com',
