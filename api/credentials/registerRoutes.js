@@ -6,6 +6,7 @@ const errors = require('../../consts/errors');
 const Register = require('./registerHandlers');
 const validateUser = require('./middleware/validateUser');
 const formatUser = require('./middleware/formatUser');
+const uniqueEmailCheck= require('./middleware/uniqueEmailCheck');
 const generateToken = require('../auth/generateToken');
 
 routes.use(express.json());
@@ -22,7 +23,7 @@ Body: {
 }
 */
 
-routes.post(urls.register, validateUser, formatUser, (req, res) => {
+routes.post(urls.register, validateUser, uniqueEmailCheck, formatUser, (req, res) => {
   const newUser = req.body;
   Register.addUser(newUser)
     .then(user => {
