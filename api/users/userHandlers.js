@@ -7,7 +7,7 @@ const getSchools = () => {
       'schools.state',
       'schools.zip',
       'schools.fundsNeeded',
-      'users.email',
+      'users.email as contact',
     )
     .from('schools')
     .innerJoin('users', 'schools.adminID', 'users.id');

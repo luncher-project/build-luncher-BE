@@ -9,8 +9,8 @@ routes.use(express.json());
 
 /*
 [GET] Get a list of schools in need  of donations
-Params: none.
-Body: none.
+Params: none,
+Body: none,
 */
 routes.get(urls.schools, (req, res) => {
     Users

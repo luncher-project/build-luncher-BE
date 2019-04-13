@@ -26,14 +26,14 @@ SUCCESFUL RES: {
 [GET] /api/schools
 SUCCESFUL RES:[
     {
-        name: 'Abraxas Continuation High',
+        schoolName: 'Abraxas Continuation High',
         state: 'CA',
         zip: 92064,
         fundsNeeded: 365,
         contact: 'schoooladmin@gmail.com'
     },
       {
-        name: '3D Academy',
+        schoolName: '3D Academy',
         state: 'TX',
         zip: 78537,
         fundsNeeded: 820,
@@ -131,6 +131,9 @@ The following body should be passed:
         role: 'admin' OR 'donor',
 }
 SUCCESFUL RES: {
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
         jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 }
 
