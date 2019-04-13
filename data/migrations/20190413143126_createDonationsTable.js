@@ -8,8 +8,7 @@ exports.up = function(knex, Promise) {
       .notNullable();
   
       table
-      .time('timestamp')
-
+      table.timestamps(true, true);
 
       table
       .integer('donorID')
