@@ -1,5 +1,6 @@
 const urls = {
-    test: '/api'
+    test: '/api',
+    schools: '/api/schools',
 }
 
 module.exports = urls;
