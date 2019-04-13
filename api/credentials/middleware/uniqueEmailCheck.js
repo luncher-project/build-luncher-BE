@@ -12,7 +12,7 @@ const uniqueEmailCheck = (req, res, next) => {
         next();
       }
     })
-    .catch(err => res.statsu(500).json(errors.getEmails));
+    .catch(err => res.status(500).json(errors.getEmails));
 };
 
 module.exports = uniqueEmailCheck;
