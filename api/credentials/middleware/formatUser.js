@@ -1,7 +1,7 @@
-const generatePassword = require('../auth/generatePassword');
+const generatePassword = require('../../auth/generatePassword');
 
-const formatUser = user => {
-  const formattedUser = user;
+const formatUser = (req, res, next) => {
+  const formattedUser = req.body;
   const formattedFirstName = formattedUser.firstName
     .toLowerCase()
     .replace(/\b([a-z])/gi, char => char.toUpperCase());
@@ -12,13 +12,15 @@ const formatUser = user => {
   const formattedRole = formattedUser.role.toLowerCase();
   const hashedPassword = generatePassword(formattedUser.password);
 
-  return {
+  req.body = {
     firstName: formattedFirstName,
     lastName: formattedLastName,
     email: formattedEmail,
     password: hashedPassword,
     role: formattedRole,
   };
+
+  next();
 };
 
 module.exports = formatUser;

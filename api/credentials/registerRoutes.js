@@ -4,8 +4,8 @@ const routes = express.Router();
 const urls = require('../../consts/urls');
 const errors = require('../../consts/errors');
 const Register = require('./registerHandlers');
-const validateUser = require('./validateUser');
-const formatUser = require('./formatUser');
+const validateUser = require('./middleware/validateUser');
+const formatUser = require('./middleware/formatUser');
 const generateToken = require('../auth/generateToken');
 
 routes.use(express.json());
@@ -22,22 +22,18 @@ Body: {
 }
 */
 
-routes.post(urls.register, (req, res) => {
-  const entry = req.body;
-  const isValid = validateUser(entry);
-  if (isValid) {
-    const newUser = formatUser(entry);
-    Register.addUser(newUser)
-      .then(user => {
-        const token = generateToken(user);
-        delete user.password;
-        const resUser = { ...user, token };
-        res.status(201).json(resUser);
-      })
-      .catch(err => res.status(500).json(errors.addUser));
-  } else {
-    res.status(400).json(errors.invalidUser);
-  }
+routes.post(urls.register, validateUser, formatUser, (req, res) => {
+  const newUser = req.body;
+  Register.addUser(newUser)
+    .then(user => {
+      const token = generateToken(user);
+      delete user.password;
+      const resUser = { ...user, token };
+      res.status(201).json(resUser);
+    })
+    .catch(err => {
+      res.status(500).json(errors.addUser);
+    });
 });
 
 module.exports = routes;
