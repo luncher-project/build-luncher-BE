@@ -53,11 +53,6 @@ SUCCESFUL RES: {
 }
 
 [GET] /api/admin/school
-SUCCESFUL RES IF THE ADMIN IS LINKED TO NO SCHOOL: {
-        message: 'no school associated with this admin'
-}
-
-[GET] /api/admin/school
 SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
         schoolName: 'Abraxas Continuation High',
         state: 'CA',
@@ -134,6 +129,7 @@ SUCCESFUL RES: {
         firstName: 'gabriel',
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
+        role: 'admin',
         jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 }
 
@@ -143,9 +139,27 @@ The following body should be passed:
         email: 'gabcab@gmail.com',
         password: 'secretpassword'
 }
-SUCCESFUL RES: {
+SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
+        id: 1,
         firstName: 'gabriel',
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
-        role: 'admin' OR 'donor',
+        role: 'admin',
+        schoolID: 1,
+}
+SUCCESFUL RES FOR ADMIN NOT LINKD TO SCHOOL: {
+        id: 1,
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
+        role: 'admin',
+        message: 'no school associated with this admin',
+}
+SUCCESFUL RES FOR DONOR: {
+        id: 1,
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
+        role: 'donor',
+        donationIDs: [1,2,3,4],
 }
