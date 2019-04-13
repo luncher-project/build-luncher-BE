@@ -20,7 +20,7 @@ All error messages will be formatted as such in the response: {
 === ENDPOINTS WITH NO AUTHENTICATION ===
 [GET] /api/test
 SUCCESFUL RES: {
-    api: 'up'
+        api: 'up'
 }
 
 [GET] /api/schools
@@ -54,11 +54,12 @@ SUCCESFUL RES: {
 
 [GET] /api/admin/school
 SUCCESFUL RES IF THE ADMIN IS LINKED TO NO SCHOOL: {
-    message: 'no school associated with this admin'
+        message: 'no school associated with this admin'
 }
 
+[GET] /api/admin/school
 SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
-        name: 'Abraxas Continuation High',
+        schoolName: 'Abraxas Continuation High',
         state: 'CA',
         zip: 92064,
         fundsNeeded: 365,
@@ -75,6 +76,24 @@ SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
                 donorContact: 'anothergenerousdonor@gmail.com' 
             }, 
         ]
+}
+
+[POST] /api/admin/school
+The following body should be passed in the request:
+NOTE: fundsReceived will be set to zero by default but can be overiden by including a fundsReceived key in the object
+{
+        schoolName: 'Abraxas Continuation High',
+        state: 'CA',
+        zip: 92064,
+        fundsNeeded: 365,
+}
+SUCCESFUL RES: {
+        schoolName: 'Abraxas Continuation High',
+        state: 'CA',
+        zip: 92064,
+        fundsNeeded: 365,
+        fundsReceived: 0,
+        adminId: 1,
 }
 
 [PUT] /api/admin/school
@@ -94,36 +113,36 @@ A token linked to an donor-type user must be attached in the Authorization heade
 [POST] /api/donatations/:id
 Valid id of a school passed in params and the following passed in request body:
 {   
-    donation: 10,
+        donation: 10,
 }
 
 SUCCESFUL RES: {
-    fundsDonated: 10,
+        fundsDonated: 10,
 }
 
 === ENDPOIINTS FOR CREDENTIALS ===
 [POST] /api/register
 The following body should be passed: 
 {
-    firstName: 'gabriel',
-    lastName: 'cabrejas',
-    email: 'gabcab@gmail.com',
-    password: 'secretpassword' (must be over 5 chars),
-    role: 'admin' OR 'donor',
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
+        password: 'secretpassword' (must be over 5 chars),
+        role: 'admin' OR 'donor',
 }
 SUCCESFUL RES: {
-    jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 }
 
 [POST] /api/login
 The following body should be passed: 
 {
-    email: 'gabcab@gmail.com',
-    password: 'secretpassword'
+        email: 'gabcab@gmail.com',
+        password: 'secretpassword'
 }
 SUCCESFUL RES: {
-    firstName: 'gabriel',
-    lastName: 'cabrejas',
-    email: 'gabcab@gmail.com',
-    role: 'admin' OR 'donor',
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
+        role: 'admin' OR 'donor',
 }
