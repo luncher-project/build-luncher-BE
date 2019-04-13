@@ -8,7 +8,7 @@ Proposed tables and end points
 
 2) Schools: ID(unique, auto-incremented, synthetic), SCHOOL_NAME(string), STATE(string as capitalized postal abreviation), ZIP(numeric), FUNDS_NEEDED(numeric in USD), FUNDS_RECEIVED(numeric in USD), ADMIN_ID(foreign key linked to ID in Users table)
 
-3) Donations: ID(unique, auto-incremented, synthetic), AMOUNT(numeric in USD), DATE(standardised format with moment.js), DONOR_ID(foreign key linked to ID in Users table), SCHOOL_ID(foreign key linked to ID in Schools table)
+3) Donations: ID(unique, auto-incremented, synthetic), AMOUNT(numeric in USD), TIMESTAMP(standardised format with moment.js), DONOR_ID(foreign key linked to ID in Users table), SCHOOL_ID(foreign key linked to ID in Schools table)
 
 // All names (FIRST_NAME, LAST_NAME, SCHOOL_NAME) will be stored with capitalization on first chars after spaces,  with all other chars lower case.
 
