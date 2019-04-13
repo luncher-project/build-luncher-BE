@@ -19,5 +19,4 @@ server.get(urls.test, (req, res) => {
     res.status(200).json(responses.test)
 })
 
-
 module.exports = server;
