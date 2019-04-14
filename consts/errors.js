@@ -40,6 +40,16 @@ const errors = {
   addSchool: {
     message: 'The school could not be added to the database',
   },
+  invalidSchoolUpdate: {
+    message: 'Admins cannot make these changes to school information',
+  },
+  noChangesRequested: {
+    message:
+      'Please provide at least one change request for schoolName, state, zip, or fundsNeeded',
+  },
+  updateSchool: {
+    message: 'The school could not be updated in the database',
+  },
 };
 
 module.exports = errors;

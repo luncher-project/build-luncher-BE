@@ -1,4 +1,5 @@
 const db = require('../../config/knexConfig');
+const errors = require('../../consts/errors');
 
 const findSchoolByAdminID = adminID => {
   return db('schools')
@@ -36,8 +37,21 @@ const findAssociatedDonations = schoolID => {
     .innerJoin('users', 'donations.donorID', 'users.id');
 };
 
+const updateSchool = (adminID, schoolUpdates) => {
+  return db('schools')
+    .where({ adminID })
+    .update(schoolUpdates)
+    .then(count => {
+      return findSchoolByAdminID(adminID);
+    })
+    .catch(err => {
+      res.status(500).json(errors.updateSchool);
+    });
+};
+
 module.exports = {
   findSchoolByAdminID,
   addSchool,
   findAssociatedDonations,
+  updateSchool,
 };

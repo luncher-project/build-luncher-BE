@@ -8,6 +8,8 @@ const School = require('./schoolHandlers');
 const validateAdminToken = require('../credentials/middleware/validateAdminToken');
 const validateSchoolFields = require('./middleware/validateSchoolFields');
 const formatSchool = require('./middleware/formatSchool');
+const validateSchoolUpdates = require('./middleware/validateSchoolUpdates');
+const formatSchoolUpdates = require('./middleware/formatSchoolUpdates');
 
 routes.use(express.json());
 
@@ -23,7 +25,7 @@ routes.get(urls.school, validateAdminToken, (req, res) => {
     .then(school => {
       if (school) {
         School.findAssociatedDonations(school.id).then(donations => {
-          if(donations.length) {
+          if (donations.length) {
             school.donations = donations;
             res.status(200).json(school);
           } else {
@@ -48,7 +50,7 @@ Body: {
     state: 'string' - post abbreviation with 2 chars,
     zip: 'integer',
     fundsNeeded: 'integer',  - optional, set to 0 by default,
-    fundsNeeded: 'integer',  - set to 0 by default every time,
+    fundsReceived: 'integer',  - set to 0 by default every time,
 }
 Headers: Authorization: valid token.
 */
@@ -65,6 +67,36 @@ routes.post(
       })
       .catch(err => {
         res.status(500).json(errors.addSchool);
+      });
+  },
+);
+
+/*
+[PUT] Change school details as an admin
+Params: none,
+Body: at least one of the following key-value pairs{
+    schoolName: 'string',
+    state: 'string' - post abbreviation with 2 chars,
+    zip: 'integer',
+    fundsNeeded: 'integer',  - optional, set to 0 by default,
+}
+Headers: Authorization: valid token.
+Note: fundsReceived cannot be updated by admin
+*/
+routes.put(
+  urls.school,
+  validateAdminToken,
+  validateSchoolUpdates,
+  formatSchoolUpdates,
+  (req, res) => {
+    const adminID = req.decodedToken.subject;
+    const schoolUpdates = req.body;
+    School.updateSchool(adminID, schoolUpdates)
+      .then(school => {
+        res.status(201).json(school);
+      })
+      .catch(err => {
+        res.status(500).json(errors.updateSchool);
       });
   },
 );

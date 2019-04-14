@@ -63,6 +63,8 @@ SUCCESFUL RES(is the name of the deleted school): {
 }
 
 [GET] /api/admin/school
+
+============================================================ DONE
 SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
         schoolName: 'Abraxas Continuation High',
         state: 'CA',
@@ -94,7 +96,10 @@ NOTE: fundsNeeded will be set to zero by default but can be overiden in initial 
         zip: 92064,
         fundsNeeded: 365,
 }
+
+============================================================ DONE
 SUCCESFUL RES: {
+        id: 1,
         schoolName: 'Abraxas Continuation High',
         state: 'CA',
         zip: 92064,
@@ -105,9 +110,14 @@ SUCCESFUL RES: {
 
 [PUT] /api/admin/school
 Changes can be made for name and fundsNeeded.
-SUCCESFUL RES(is an object with the updated name and/or fundsNeeded for the school): {
-        name: 'Abraxas Continuation High',
-        fundsNeeded: 420,
+SUCCESFUL RES(is an object with the updated schoolName, state, zip, and/or fundsNeeded for the school): {
+        id: 1,
+        schoolName: 'Abraxas Continuation High',
+        state: 'CA',
+        zip: 92064,
+        fundsNeeded: 800,
+        fundsReceived: 0,
+        adminId: 1,
 }
 
 [DELETE] /api/admin/school
