@@ -72,13 +72,15 @@ SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
         contact: 'schoooladmin@gmail.com',
         donations: [
             {
-                date: 'April 13, 2019 11:46 AM',
+                donationId: 1,
+                date: '2019-04-14 09:53:36',
                 amount: 25,
                 donorContact: 'generousdonor@gmail.com' 
             },     {
-                date: 'April 10, 2018 11:46 AM',
-                amount: 55,
-                donorContact: 'anothergenerousdonor@gmail.com' 
+                donationId: 2,
+                date: '2019-04-14 09:53:37',
+                amount: 25,
+                donorContact: 'generousdonor2@gmail.com' 
             }, 
         ]
 }

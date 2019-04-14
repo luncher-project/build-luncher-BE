@@ -23,7 +23,21 @@ const findSchoolById = id => {
     .first();
 };
 
+const findAssociatedDonations = schoolID => {
+  return db('donations')
+    .select(
+      'donations.id as donationID',
+      'donations.created_at as date',
+      'donations.amount',
+      'users.email as donorContact',
+    )
+    .where({ schoolID })
+    .from('donations')
+    .innerJoin('users', 'donations.donorID', 'users.id');
+};
+
 module.exports = {
   findSchoolByAdminID,
   addSchool,
+  findAssociatedDonations,
 };

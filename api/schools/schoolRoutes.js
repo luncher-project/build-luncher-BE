@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const urls = require('../../consts/urls');
 const errors = require('../../consts/errors');
+const responses = require('../../consts/responses');
 const School = require('./schoolHandlers');
 const validateAdminToken = require('../credentials/middleware/validateAdminToken');
 const validateSchoolFields = require('./middleware/validateSchoolFields');
@@ -21,7 +22,15 @@ routes.get(urls.school, validateAdminToken, (req, res) => {
   School.findSchoolByAdminID(id)
     .then(school => {
       if (school) {
-        res.status(200).json(school);
+        School.findAssociatedDonations(school.id).then(donations => {
+          if(donations.length) {
+            school.donations = donations;
+            res.status(200).json(school);
+          } else {
+            school.message = responses.noSchoolDonations;
+            res.status(200).json(school);
+          }
+        });
       } else {
         res.status(200).json(errors.noSchoolAssociated);
       }
