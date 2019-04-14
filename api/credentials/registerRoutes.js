@@ -22,7 +22,6 @@ Body: {
     role: 'admin' OR 'donor,
 }
 */
-
 routes.post(urls.register, validateUser, uniqueEmailCheck, formatUser, (req, res) => {
   const newUser = req.body;
   Register.addUser(newUser)

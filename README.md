@@ -55,6 +55,13 @@ SUCCESFUL RES: {
         email: 'gabcab@gmail.com'
 }
 
+[DELETE] /api/admin
+** Deleting an admin will delete the school asssociated with that admin also **
+SUCCESFUL RES(is the name of the deleted school): {
+        adminDeleted: 'gabcab@gmail.com',
+        schoolDeleted: 'Abraxas Continuation High',
+}
+
 [GET] /api/admin/school
 SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
         schoolName: 'Abraxas Continuation High',

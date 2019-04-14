@@ -1,5 +1,4 @@
 const db = require('../../config/knexConfig');
-const errors = require('../../consts/errors');
 
 const findUserByEmail = email => {
   return db('users')

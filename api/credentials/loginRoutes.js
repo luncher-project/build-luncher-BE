@@ -11,6 +11,15 @@ const generateToken = require('../auth/generateToken');
 
 routes.use(express.json());
 
+/* 
+[POST] Login as an admin or donor
+Params: none,
+Body: {
+    email: 'string',
+    password: 'string',
+    email and password must match those listen in the databse from registration/account changes
+}
+*/
 routes.post(urls.login, validateLoginFields, (req, res) => {
   const { email, password } = req.body;
   Login.findUserByEmail(email)
