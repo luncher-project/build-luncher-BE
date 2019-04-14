@@ -14,10 +14,12 @@ server.use(express.json());
 const userRoutes = require('./users/userRoutes');
 const registerRoutes = require('./credentials/registerRoutes');
 const loginRoutes = require('./credentials/loginRoutes');
+const schoolRoutes = require('./schools/schoolRoutes');
 
 server.use(userRoutes);
 server.use(registerRoutes);
 server.use(loginRoutes);
+server.use(schoolRoutes);
 
 /* 
 [GET] no params or body required

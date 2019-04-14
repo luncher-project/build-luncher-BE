@@ -24,6 +24,15 @@ const errors = {
   getDonations: {
     message: 'There was an error retrieving donations',
   },
+  noToken: {
+    message: 'This is a protected route, please supply a valid token',
+  },
+  getSchool: {
+    message: 'The school for this admin could not be retrieved',
+  },
+  noSchoolAssociated: {
+    message: 'There is no school associated with this admin',
+  },
 };
 
 module.exports = errors;
