@@ -18,11 +18,14 @@ All error messages will be formatted as such in the response: {
 }
 
 === ENDPOINTS WITH NO AUTHENTICATION ===
+
+============================================================ DONE
 [GET] /api/test
 SUCCESFUL RES: {
         api: 'up'
 }
 
+============================================================ DONE
 [GET] /api/schools
 SUCCESFUL RES:[
     {
@@ -105,6 +108,16 @@ SUCCESFUL RES(is the name of the deleted school): {
 
 === ENDPOINTS FOR DONORS ===
 A token linked to an donor-type user must be attached in the Authorization header of the request
+
+
+[PUT] /api/donor
+Changes can be made to the donors first name, last name, email, and password
+SUCCESFUL RES: {
+        firstName: 'Gabriel',
+        lastName: 'Cabrejas',
+        email: 'gabcab@gmail.com'
+}
+
 [POST] /api/donatations/:id
 Valid id of a school passed in params and the following passed in request body:
 {   
@@ -126,6 +139,8 @@ The following body should be passed:
         password: 'secretpassword' (must be over 5 chars),
         role: 'admin' OR 'donor',
 }
+
+============================================================ DONE
 SUCCESFUL RES: {
         id: 1,
         firstName: 'gabriel',
@@ -141,6 +156,8 @@ The following body should be passed:
         email: 'gabcab@gmail.com',
         password: 'secretpassword'
 }
+
+============================================================ DONE
 SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
         id: 1,
         firstName: 'gabriel',
@@ -150,6 +167,8 @@ SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
         token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
         schoolID: 1,
 }
+
+============================================================ DONE
 SUCCESFUL RES FOR ADMIN NOT LINKED TO SCHOOL: {
         id: 1,
         firstName: 'gabriel',
@@ -159,6 +178,8 @@ SUCCESFUL RES FOR ADMIN NOT LINKED TO SCHOOL: {
         token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
         message: 'This admin is not associated with any schools',
 }
+
+============================================================ DONE
 SUCCESFUL RES FOR DONOR: {
         id: 1,
         firstName: 'gabriel',
@@ -173,6 +194,7 @@ SUCCESFUL RES FOR DONOR: {
         }],
 }
 
+============================================================ DONE
 SUCCESFUL RES FOR DONOR YET TO DONATE: {
         id: 1,
         firstName: 'gabriel',
