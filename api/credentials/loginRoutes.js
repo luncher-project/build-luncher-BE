@@ -37,7 +37,7 @@ routes.post(urls.login, validateLoginFields, (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json(errors.invalidCredentials);
+      res.status(500).json(errors.loginUser);
     });
 
   const adminLogin = (admin, token) => {

@@ -15,6 +15,9 @@ const errors = {
   existingEmail: {
     message: 'An account with this email already exists',
   },
+  loginUser: {
+    message: 'There was an error logging in the user',
+  },
   invalidCredentials: {
     message: 'Please provide a user with valid credentials',
   },
