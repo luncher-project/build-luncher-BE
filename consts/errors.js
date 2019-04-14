@@ -33,6 +33,13 @@ const errors = {
   noSchoolAssociated: {
     message: 'There is no school associated with this admin',
   },
+  invalidSchool: {
+    message:
+      'Please provide a valid school with schoolName, state, and zip as per the API docs',
+  },
+  addSchool: {
+    message: 'The school could not be added to the database',
+  },
 };
 
 module.exports = errors;

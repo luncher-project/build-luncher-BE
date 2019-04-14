@@ -85,7 +85,7 @@ SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
 
 [POST] /api/admin/school
 The following body should be passed in the request:
-NOTE: fundsReceived will be set to zero by default but can be overiden by including a fundsReceived key in the object
+NOTE: fundsNeeded will be set to zero by default but can be overiden in initial POST or subsequent PUT, fundsReceived will always be set to 0
 {
         schoolName: 'Abraxas Continuation High',
         state: 'CA',
