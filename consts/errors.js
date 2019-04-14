@@ -15,6 +15,12 @@ const errors = {
   existingEmail: {
     message: 'An account with this email already exists',
   },
+  invalidCredentials: {
+    message: 'Please provide a user with valid credentials',
+  },
+  getDonations: {
+    message: 'There was an error retrieving donations',
+  },
 };
 
 module.exports = errors;

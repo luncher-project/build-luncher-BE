@@ -119,6 +119,7 @@ SUCCESFUL RES: {
 [POST] /api/register
 The following body should be passed: 
 {
+        id: 1,
         firstName: 'gabriel',
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
@@ -126,11 +127,12 @@ The following body should be passed:
         role: 'admin' OR 'donor',
 }
 SUCCESFUL RES: {
+        id: 1,
         firstName: 'gabriel',
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
-        jwtToken:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
 }
 
 [POST] /api/login
@@ -145,15 +147,17 @@ SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
         schoolID: 1,
 }
-SUCCESFUL RES FOR ADMIN NOT LINKD TO SCHOOL: {
+SUCCESFUL RES FOR ADMIN NOT LINKED TO SCHOOL: {
         id: 1,
         firstName: 'gabriel',
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
-        message: 'no school associated with this admin',
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        message: 'This admin is not associated with any schools',
 }
 SUCCESFUL RES FOR DONOR: {
         id: 1,
@@ -161,5 +165,20 @@ SUCCESFUL RES FOR DONOR: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'donor',
-        donationIDs: [1,2,3,4],
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        donationIDs: [{
+                id: 1,
+                amount: 50,
+                schoolID: 1,
+        }],
+}
+
+SUCCESFUL RES FOR DONOR YET TO DONATE: {
+        id: 1,
+        firstName: 'gabriel',
+        lastName: 'cabrejas',
+        email: 'gabcab@gmail.com',
+        role: 'donor',
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        message: 'This donor is not associated with any donationss',
 }

@@ -13,9 +13,11 @@ server.use(express.json());
 
 const userRoutes = require('./users/userRoutes');
 const registerRoutes = require('./credentials/registerRoutes');
+const loginRoutes = require('./credentials/loginRoutes');
 
 server.use(userRoutes);
 server.use(registerRoutes);
+server.use(loginRoutes);
 
 /* 
 [GET] no params or body required
