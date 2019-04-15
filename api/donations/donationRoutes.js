@@ -50,12 +50,12 @@ routes.post(urls.donation, validateDonorToken, validateDonation, (req, res) => {
   const sendDonationResponse = (schoolID, donation) => {
     Donation.findSchoolBySchoolID(schoolID)
       .then(school => {
-        const updatedSchool = {
+        const fundedSchool = {
           schoolName: school.schoolName,
           fundsNeeded: school.fundsNeeded,
           fundsReceived: school.fundsReceived,
         };
-        res.status(200).json({ ...donation, updatedSchool });
+        res.status(200).json({ ...donation, fundedSchool });
       })
       .catch(err => {
         res.status(500).json(errors.getSchool);

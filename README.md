@@ -89,6 +89,7 @@ SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
 
 [POST] /api/admin/school
 The following body should be passed in the request:
+NOTE: An admin can only be linked with 1 school at a time, if an admin with an existing school makes a [POST], it will be rejected
 NOTE: fundsNeeded will be set to zero by default but can be overiden in initial POST or subsequent PUT, fundsReceived will always be set to 0
 {
         schoolName: 'Abraxas Continuation High',
@@ -145,17 +146,18 @@ Valid id of a school passed in params and the following passed in request body:
         amount: 10,
 }
 
+============================================================ DONE
 SUCCESFUL RES: {
-    id: 42,
-    amount: 200,
-    created_at: "2019-04-15 13:58:27",
-    updated_at: "2019-04-15 13:58:27",
-    donorID: 27,
-    schoolID: 2,
-    updatedSchool: {
-        schoolName: 'Nathan Hale Junior High',
-        fundsNeeded: 3200,
-        fundsReceived: 550
+        id: 42,
+        amount: 200,
+        created_at: "2019-04-15 13:58:27",
+        updated_at: "2019-04-15 13:58:27",
+        donorID: 27,
+        schoolID: 2,
+        fundedSchool: {
+                schoolName: 'Nathan Hale Junior High',
+                fundsNeeded: 3200,
+                fundsReceived: 550
     }
 }
 
@@ -178,7 +180,7 @@ SUCCESFUL RES: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        token:JWT,
 }
 
 [POST] /api/login
@@ -195,7 +197,7 @@ SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        token: JWT,
         schoolID: 1,
 }
 
@@ -206,7 +208,7 @@ SUCCESFUL RES FOR ADMIN NOT LINKED TO SCHOOL: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'admin',
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        token: JWT,
         message: 'This admin is not associated with any schools',
 }
 
@@ -217,7 +219,7 @@ SUCCESFUL RES FOR DONOR: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'donor',
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+        token: JWT,
         donationIDs: [{
                 id: 1,
                 amount: 50,
@@ -232,6 +234,6 @@ SUCCESFUL RES FOR DONOR YET TO DONATE: {
         lastName: 'cabrejas',
         email: 'gabcab@gmail.com',
         role: 'donor',
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-        message: 'This donor is not associated with any donationss',
+        token: JWT,
+        message: 'This donor is not associated with any donations',
 }
