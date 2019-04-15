@@ -2,8 +2,7 @@ const db = require('../../config/knexConfig');
 
 const findUserByEmail = email => {
   return db('users')
-    .where({ email })
-    .first();
+    .where({ email });
 };
 
 const findAssociatedSchool = adminID => {

@@ -22,7 +22,7 @@ Body: at least one of the following key-value pairs{
 Headers: Authorization: valid token.
 Note: id, role, and schoolID cannot be updated by admin
 */
-routes.post(
+routes.put(
   urls.admin,
   validateAdminToken,
   valdiateAdminUpdates,

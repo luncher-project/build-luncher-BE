@@ -24,13 +24,18 @@ routes.post(urls.login, validateLoginFields, (req, res) => {
   const { email, password } = req.body;
   Login.findUserByEmail(email)
     .then(user => {
-      if (bcrypt.compareSync(password, user.password)) {
-        const token = generateToken(user);
-        delete user.password;
-        if (user.role === 'donor') {
-          donorLogin(user, token);
+      if (user.length) {
+        [user] = user;
+        if (bcrypt.compareSync(password, user.password)) {
+          const token = generateToken(user);
+          delete user.password;
+          if (user.role === 'donor') {
+            donorLogin(user, token);
+          } else {
+            adminLogin(user, token);
+          }
         } else {
-          adminLogin(user, token);
+          res.status(401).json(errors.invalidCredentials);
         }
       } else {
         res.status(401).json(errors.invalidCredentials);
@@ -43,14 +48,14 @@ routes.post(urls.login, validateLoginFields, (req, res) => {
   const adminLogin = (admin, token) => {
     Login.findAssociatedSchool(admin.id)
       .then(school => {
-        if(school.length){
-        [school] = school;
-        admin.schoolID = school.id;
-        const resAdmin = { ...admin, token };
-        res.status(200).json(resAdmin);
+        if (school.length) {
+          [school] = school;
+          admin.schoolID = school.id;
+          const resAdmin = { ...admin, token };
+          res.status(200).json(resAdmin);
         } else {
           admin.message = 'no associated schools';
-          res.status(200).json({ ...admin, token })
+          res.status(200).json({ ...admin, token });
         }
       })
       .catch(err => {
