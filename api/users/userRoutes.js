@@ -23,4 +23,22 @@ routes.get(urls.schools, (req, res) => {
     })
 })
 
+/*
+[GET] Get a single school by its id
+Params: schoolID,
+Body: none,
+*/
+routes.get(urls.schoolByID, (req, res) => {
+    const { id } = req.params;
+    Users
+    .getSchoolByID(id)
+    .then(schools => {
+        res.status(200).json(schools)
+    })
+    .catch(err => {
+        res.status(500).json(errors.getSchools);
+    })
+})
+
+
 module.exports = routes;

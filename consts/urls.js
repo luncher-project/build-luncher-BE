@@ -1,6 +1,7 @@
 const urls = {
     test: '/api',
     schools: '/api/schools',
+    schoolByID: '/api/schools/:id',
     register: '/api/register',
     login: '/api/login',
     admin: '/api/admin',
