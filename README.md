@@ -139,14 +139,24 @@ SUCCESFUL RES: {
         email: 'gabcab@gmail.com'
 }
 
-[POST] /api/donatations/:id
+[POST] /api/donations/:id
 Valid id of a school passed in params and the following passed in request body:
 {   
-        donation: 10,
+        amount: 10,
 }
 
 SUCCESFUL RES: {
-        fundsDonated: 10,
+    id: 42,
+    amount: 200,
+    created_at: "2019-04-15 13:58:27",
+    updated_at: "2019-04-15 13:58:27",
+    donorID: 27,
+    schoolID: 2,
+    updatedSchool: {
+        schoolName: 'Nathan Hale Junior High',
+        fundsNeeded: 3200,
+        fundsReceived: 550
+    }
 }
 
 === ENDPOIINTS FOR CREDENTIALS ===

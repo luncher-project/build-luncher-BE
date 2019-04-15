@@ -2,6 +2,9 @@ const errors = {
   getSchools: {
     message: 'There was an error retrieving schools',
   },
+  getSchool: {
+    message: 'There was an error retrieving the school',
+  },
   invalidUser: {
     message:
       'Please provide a valid user with firstName, lastName, email, password, and role as per the API docs',
@@ -44,8 +47,7 @@ const errors = {
     message: 'Admins cannot make these changes to school information',
   },
   noChangesRequested: {
-    message:
-      'Please provide at least one valid change request',
+    message: 'Please provide at least one valid change request',
   },
   updateSchool: {
     message: 'The school could not be updated in the database',
@@ -55,6 +57,12 @@ const errors = {
   },
   updateAdmin: {
     message: 'The admin could not be updated in the database',
+  },
+  addDonation: {
+    message: 'The donation could not be added to the database',
+  },
+  donationFormat: {
+    message: 'A donation amount must be supplied above zero, as an integer, and without a currency prefix',
   },
 };
 

@@ -16,12 +16,14 @@ const registerRoutes = require('./credentials/registerRoutes');
 const loginRoutes = require('./credentials/loginRoutes');
 const schoolRoutes = require('./schools/schoolRoutes');
 const adminRoutes =require('./admins/adminRoutes');
+const donationRoutes = require('./donations/donationRoutes');
 
 server.use(userRoutes);
 server.use(registerRoutes);
 server.use(loginRoutes);
 server.use(schoolRoutes);
 server.use(adminRoutes);
+server.use(donationRoutes);
 
 /* 
 [GET] no params or body required
