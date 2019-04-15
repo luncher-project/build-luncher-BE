@@ -15,7 +15,7 @@ const updateAdmin = (id, adminUpdates) => {
         return findAdminByID(id);
       })
       .catch(err => {
-        res.status(500).json(errors.updateSchool);
+        res.status(500).json(errors.updateAdmin);
       });
   };
 

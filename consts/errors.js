@@ -55,8 +55,14 @@ const errors = {
   invalidAdminUpdate: {
     message: 'Admins cannot make these changes to their information',
   },
+  invalidDonorUpdate: {
+    message: 'Donor cannot make these changes to their information',
+  },
   updateAdmin: {
     message: 'The admin could not be updated in the database',
+  },
+  updateDonor: {
+    message: 'The donor could not be updated in the database',
   },
   addDonation: {
     message: 'The donation could not be added to the database',
