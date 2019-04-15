@@ -70,6 +70,12 @@ const errors = {
   donationFormat: {
     message: 'A donation amount must be supplied above zero, as an integer, and without a currency prefix',
   },
+  linkedSchool: {
+    message: 'There was an error checking whether this admin is already linked to  a school',
+  }, 
+  secondSchool: {
+    message: 'This admin is already linked to a school, an admin can only be linked to one school at a time',
+  }
 };
 
 module.exports = errors;

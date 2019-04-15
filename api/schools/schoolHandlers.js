@@ -7,6 +7,11 @@ const findSchoolByAdminID = adminID => {
     .first();
 };
 
+const findSchoolByAdminIDArr = adminID => {
+  return db('schools')
+    .where({ adminID });
+};
+
 const addSchool = newSchool => {
   return db('schools')
     .insert(newSchool)
@@ -51,6 +56,7 @@ const updateSchool = (adminID, schoolUpdates) => {
 
 module.exports = {
   findSchoolByAdminID,
+  findSchoolByAdminIDArr,
   addSchool,
   findAssociatedDonations,
   updateSchool,

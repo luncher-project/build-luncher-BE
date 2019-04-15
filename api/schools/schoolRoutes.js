@@ -6,6 +6,7 @@ const errors = require('../../consts/errors');
 const responses = require('../../consts/responses');
 const School = require('./schoolHandlers');
 const validateAdminToken = require('../credentials/middleware/validateAdminToken');
+const validateNoOtherLinkedSchools = require('./middleware/validateNoOtherLinkedSchools');
 const validateSchoolFields = require('./middleware/validateSchoolFields');
 const formatSchool = require('./middleware/formatSchool');
 const validateSchoolUpdates = require('./middleware/validateSchoolUpdates');
@@ -57,6 +58,7 @@ Headers: Authorization: valid token.
 routes.post(
   urls.school,
   validateAdminToken,
+  validateNoOtherLinkedSchools,
   validateSchoolFields,
   formatSchool,
   (req, res) => {
