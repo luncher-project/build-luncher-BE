@@ -43,9 +43,15 @@ routes.post(urls.login, validateLoginFields, (req, res) => {
   const adminLogin = (admin, token) => {
     Login.findAssociatedSchool(admin.id)
       .then(school => {
+        if(school.length){
+        [school] = school;
         admin.schoolID = school.id;
         const resAdmin = { ...admin, token };
         res.status(200).json(resAdmin);
+        } else {
+          admin.message = 'no associated schools';
+          res.status(200).json({ ...admin, token })
+        }
       })
       .catch(err => {
         user.message = responses.noSchools;

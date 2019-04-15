@@ -45,10 +45,16 @@ const errors = {
   },
   noChangesRequested: {
     message:
-      'Please provide at least one change request for schoolName, state, zip, or fundsNeeded',
+      'Please provide at least one valid change request',
   },
   updateSchool: {
     message: 'The school could not be updated in the database',
+  },
+  invalidAdminUpdate: {
+    message: 'Admins cannot make these changes to their information',
+  },
+  updateAdmin: {
+    message: 'The admin could not be updated in the database',
   },
 };
 

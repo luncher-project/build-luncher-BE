@@ -110,6 +110,8 @@ SUCCESFUL RES: {
 
 [PUT] /api/admin/school
 Changes can be made for name and fundsNeeded.
+
+============================================================ DONE
 SUCCESFUL RES(is an object with the updated schoolName, state, zip, and/or fundsNeeded for the school): {
         id: 1,
         schoolName: 'Abraxas Continuation High',

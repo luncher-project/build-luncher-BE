@@ -8,8 +8,7 @@ const findUserByEmail = email => {
 
 const findAssociatedSchool = adminID => {
     return db('schools')
-    .where({ adminID })
-    .first();
+    .where({ adminID });
 }
 
 const findAssociatedDonations = donorID => {
