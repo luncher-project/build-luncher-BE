@@ -1,239 +1,313 @@
-# build-luncher-BE
+#Lunchr Backend
 
-Proposed tables and end points
+#API
+All API requests are made to:
 
-===== TABLES =====
+#Test
+a **GET** request to /api will return a success message if the API is working and has been accessed correctly.
+###Response
+```
+{
+    api: 'up',
+}
+```
 
-1) Users: ID(unique, auto-incremented, synthetic), FIRST_NAME(string), LAST_NAME(string), EMAIL(string with email validation?), PASSWORD(non-plain-text storage must be over 5 chars), ROLE(admin OR donor)
+#Credentials
 
-2) Schools: ID(unique, auto-incremented, synthetic), SCHOOL_NAME(string), STATE(string as capitalized postal abreviation), ZIP(numeric), FUNDS_NEEDED(numeric in USD), FUNDS_RECEIVED(numeric in USD), ADMIN_ID(foreign key linked to ID in Users table)
+##Register
+a **POST** request to /api/register will create a new user(admin or donor) and return and object containing an authentication token.
 
-3) Donations: ID(unique, auto-incremented, synthetic), AMOUNT(numeric in USD), TIMESTAMP(standardised format with moment.js), DONOR_ID(foreign key linked to ID in Users table), SCHOOL_ID(foreign key linked to ID in Schools table)
+###Request
+```
+{
+	"firstName": "donald",
+	"lastName": "anderton",
+	"email": "dand@gmail.com",
+	"password": "password" (must be over 5 chars),
+	"role": "admin" (must be either "admin" or "donor")
+}
+```
 
-// All names (FIRST_NAME, LAST_NAME, SCHOOL_NAME) will be stored with capitalization on first chars after spaces,  with all other chars lower case.
-
-=== ERROR MESSAGES ===
-All error messages will be formatted as such in the response: {
-    message: 'reason for error',
+###Response
+```
+{
+    "id": 36,
+    "firstName": "Donald",
+    "lastName": "Anderton",
+    "email": "dand@gmail.com",
+    "role": "admin",
+    "token": "jwt"
 }
 
-=== ENDPOINTS WITH NO AUTHENTICATION ===
+```
 
-============================================================ DONE
-[GET] /api/test
-SUCCESFUL RES: {
-        api: 'up'
+##Login
+a **POST** request to /api/login will log in a user(admin or donor) and return an object containing an authentication token. For admins, the object will either contain a schoolID for which the admin is associated or a message to say the admin is linked to no schools. For donor, the object will either contain an array of donations that they have made or a message to say the donor has yet to make a donation.
+
+###Request
+```
+{
+	"email": "dand@gmail.com",
+	"password": "password"
 }
+```
 
-============================================================ DONE
-[GET] /api/schools
-SUCCESFUL RES:[
+###Response
+```
+{
+    "id": 1,
+    "firstName": "Donald",
+    "lastName": "Anderton",
+    "email": "dand@gmail.com",
+    "role": "admin",
+    "message": "no associated schools",
+    "token": "jwt"
+}
+```
+
+#Schools (no authentication required)
+
+##All schools
+a **GET** request to /api/schools will return a list of the schools seeking lunch funds.
+
+###Response
+```
+[
     {
-        schoolName: 'Abraxas Continuation High',
-        state: 'CA',
-        zip: 92064,
-        fundsNeeded: 365,
-        contact: 'schoooladmin@gmail.com'
+        "schoolName": "Marion-Sterling Elementary School",
+        "state": "OH",
+        "zip": 44115,
+        "fundsNeeded": 2500,
+        "contact": "jj@gmail.com"
     },
-      {
-        schoolName: '3D Academy',
-        state: 'TX',
-        zip: 78537,
-        fundsNeeded: 820,
-        contact: 'schoooladmintwo@gmail.com'
+    {
+        "schoolName": "Nathan Hale Junior High",
+        "state": "OK",
+        "zip": 74129,
+        "fundsNeeded": 3200,
+        "contact": "tb@gmail.com"
     },
 ]
+```
 
-=== ENDPOINTS FOR ADMINS ===
-A token linked to an admin-type user must be attached in the Authorization header of the request
+##School by ID
+a **GET** request to /api/schools/:id will return the school linked with the id provided in params.
 
-[PUT] /api/admin
-Changes can be made to the admins first name, last name, email, and password
-SUCCESFUL RES: {
-        firstName: 'Gabriel',
-        lastName: 'Cabrejas',
-        email: 'gabcab@gmail.com'
-}
+###Request
+```
+/api/schools/1
+```
 
-[DELETE] /api/admin
-** Deleting an admin will delete the school asssociated with that admin also **
-SUCCESFUL RES(is the name of the deleted school): {
-        adminDeleted: 'gabcab@gmail.com',
-        schoolDeleted: 'Abraxas Continuation High',
-}
-
-[GET] /api/admin/school
-
-============================================================ DONE
-SUCCESFUL RES IF THE ADMIN IS LINKED TO A SCHOOL: {
-        schoolName: 'Abraxas Continuation High',
-        state: 'CA',
-        zip: 92064,
-        fundsNeeded: 365,
-        fundsReceived: 220,
-        contact: 'schoooladmin@gmail.com',
-        donations: [
-            {
-                donationId: 1,
-                date: '2019-04-14 09:53:36',
-                amount: 25,
-                donorContact: 'generousdonor@gmail.com' 
-            },     {
-                donationId: 2,
-                date: '2019-04-14 09:53:37',
-                amount: 25,
-                donorContact: 'generousdonor2@gmail.com' 
-            }, 
-        ]
-}
-
-[POST] /api/admin/school
-The following body should be passed in the request:
-NOTE: An admin can only be linked with 1 school at a time, if an admin with an existing school makes a [POST], it will be rejected
-NOTE: fundsNeeded will be set to zero by default but can be overiden in initial POST or subsequent PUT, fundsReceived will always be set to 0
+###Response
+```
 {
-        schoolName: 'Abraxas Continuation High',
-        state: 'CA',
-        zip: 92064,
-        fundsNeeded: 365,
+    "schoolName": "Marion-Sterling Elementary School",
+    "state": "OH",
+    "zip": 44115,
+    "fundsNeeded": 2500,
+    "contact": "jj@gmail.com"
 }
+```
 
-============================================================ DONE
-SUCCESFUL RES: {
-        id: 1,
-        schoolName: 'Abraxas Continuation High',
-        state: 'CA',
-        zip: 92064,
-        fundsNeeded: 365,
-        fundsReceived: 0,
-        adminId: 1,
+#Admins
+Admin requests that contain a valid token in their Authentication header will be accepteed.
+
+##Update an admin
+a **PUT** request to /api/admin with a valid token in the Authentication header will return an object of a newly updated admin.
+
+###Request
+```
+{
+	"lastName": "armstrong"
 }
+```
 
-[PUT] /api/admin/school
-Changes can be made for name and fundsNeeded.
-
-============================================================ DONE
-SUCCESFUL RES(is an object with the updated schoolName, state, zip, and/or fundsNeeded for the school): {
-        id: 1,
-        schoolName: 'Abraxas Continuation High',
-        state: 'CA',
-        zip: 92064,
-        fundsNeeded: 800,
-        fundsReceived: 0,
-        adminId: 1,
+###Response
+```
+{
+    "id": 1,
+    "firstName": "Donald",
+    "lastName": "Armstrong",
+    "email": "dand@gmail.com",
+    "role": "admin"
 }
+```
 
-[DELETE] /api/admin/school
-SUCCESFUL RES(is the name of the deleted school): {
-        schoolDeleted: 'Abraxas Continuation High',
+##Delete an admin
+a **DELETE** request to /api/admin with a valid token in the Authentication header will return an object of the deleted admin. Deleting an admin will delete a linked school and will remove any existing links between donations previously made to that school and the school itself.
+
+###Response
+```
+{
+    "id": 1,
+    "firstName": "Donald",
+    "lastName": "Armstrong",
+    "email": "dand@gmail.com",
+    "role": "admin"
 }
+```
 
-=== ENDPOINTS FOR DONORS ===
-A token linked to an donor-type user must be attached in the Authorization header of the request
+##School associated with admin
+a **GET** request to /api/admin/school with a valid token in the Authentication header will return a school object if the admin has created a school and a message to say there are no linked schools otherwise. The school object will contain an array of associated donations and a message to say no donations are associated with the school otherwise.
 
-
-[PUT] /api/donor
-Changes can be made to the donors first name, last name, email, and password
-SUCCESFUL RES: {
-        firstName: 'Gabriel',
-        lastName: 'Cabrejas',
-        email: 'gabcab@gmail.com'
+###Response
+```
+{
+    "id": 1,
+    "schoolName": "Marion-Sterling Elementary School",
+    "state": "OH",
+    "zip": 44115,
+    "fundsNeeded": 2500,
+    "fundsReceived": 0,
+    "adminID": 1,
+    "message": "This school is not associated with any donations"
 }
+```
 
-[POST] /api/donations/:id
-Valid id of a school passed in params and the following passed in request body:
-{   
-        amount: 10,
+##Add a school
+a **POST** request to /api/admin/school with a valid token in the Authentication header will return an object of a newly added school if the admin is not already tied to a school. Admins may not be associated with multiple schools.
+
+###Request
+```
+{
+	"schoolName": "Calhan Public School",
+	"state": "co",
+	"zip": 80808,
+	"fundsNeeded": 20 (optional, will default to 0)
 }
+```
 
-============================================================ DONE
-SUCCESFUL RES: {
-        id: 42,
-        amount: 200,
-        created_at: "2019-04-15 13:58:27",
-        updated_at: "2019-04-15 13:58:27",
-        donorID: 27,
-        schoolID: 2,
-        fundedSchool: {
-                schoolName: 'Nathan Hale Junior High',
-                fundsNeeded: 3200,
-                fundsReceived: 550
+###Response
+```
+{
+    "id": 2,
+    "schoolName": "Calhan Public School",
+    "state": "CO",
+    "zip": 80808,
+    "fundsNeeded": 0,
+    "fundsReceived": 0,
+    "adminID": 2
+}
+```
+
+##Update a school
+a **PUT** request to /api/admin/school with a valid token in the Authentication header will return an object of a newly updated school.
+
+###Request
+```
+{
+	"schoolName": "Calhan Public  Schools"
+}
+```
+
+###Response
+```
+{
+    "id": 2,
+    "schoolName": "Calhan Public  Schools",
+    "state": "CO",
+    "zip": 80808,
+    "fundsNeeded": 0,
+    "fundsReceived": 0,
+    "adminID": 2
+}
+```
+
+
+##Delete a school
+a **DELETE** request to /api/admin/school with a valid token in the Authentication header will return an object of the deleted school. Deleting a school will remove any existing links between donations previously made to that school and the school itself.
+
+###Response
+```
+{
+    "id": 2,
+    "schoolName": "Calhan Public  Schools",
+    "state": "CO",
+    "zip": 80808,
+    "fundsNeeded": 0,
+    "fundsReceived": 0,
+    "adminID": 2,
+    "message": "This school has been deleted successfully"
+}
+```
+
+#Donors
+Donor requests that contain a valid token in their Authentication header will be accepteed.
+
+##Update a donor
+a **PUT** request to /api/donor with a valid token in the Authentication header will return an object of a newly updated donor.
+
+###Request
+```
+{
+	"lastName":  "Artinger"
+}
+```
+
+###Response
+```
+{
+    "id": 3,
+    "firstName": "Tina",
+    "lastName": "Artinger",
+    "email": "tr@gmail.com",
+    "role": "donor"
+}
+```
+
+##Delete a donor
+a **DELETE** request to /api/donor with a valid token in the Authentication header will return an object of the deleted donor. Deleting a donor will remove any existing links between donations previously made by that donor and the donations they have made.
+
+###Response
+```
+{
+    "id": 3,
+    "firstName": "Tina",
+    "lastName": "Artinger",
+    "email": "ta@gmail.com",
+    "role": "donor",
+    "message": "This donor has been deleted successfully"
+}
+```
+
+#Donations
+Donor requests that contain a valid token linked to a donor in their Authentication header will be accepteed.
+
+##Update a donor
+a **POST** request to /api/donation/:id with a valid token in the Authentication header and an id of an existing school in the params will return an object the information on the donation and the associated schools funds.
+
+###Request
+```
+/api/donation/1
+{
+"amount": 200 (must be an integer greater than 0)
+}
+```
+
+###Response
+```
+{
+    "id": 1,
+    "amount": 200,
+    "created_at": "2019-04-16 10:10:51",
+    "updated_at": "2019-04-16 10:10:51",
+    "donorID": 3,
+    "schoolID": 1,
+    "fundedSchool": {
+        "schoolName": "Marion-Sterling Elementary School",
+        "fundsNeeded": 2500,
+        "fundsReceived": 200
     }
 }
+```
 
-=== ENDPOIINTS FOR CREDENTIALS ===
-[POST] /api/register
-The following body should be passed: 
+
+#Errors
+all errors are return in the form of an object with a message key and note on the specific issue.
+
+###Response
+```
 {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        password: 'secretpassword' (must be over 5 chars),
-        role: 'admin' OR 'donor',
+    message: 'There was an error checking whether this admin is already linked to  a school',
 }
-
-============================================================ DONE
-SUCCESFUL RES: {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        role: 'admin',
-        token:JWT,
-}
-
-[POST] /api/login
-The following body should be passed: 
-{
-        email: 'gabcab@gmail.com',
-        password: 'secretpassword'
-}
-
-============================================================ DONE
-SUCCESFUL RES FOR ADMIN LINKED TO SCHOOL: {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        role: 'admin',
-        token: JWT,
-        schoolID: 1,
-}
-
-============================================================ DONE
-SUCCESFUL RES FOR ADMIN NOT LINKED TO SCHOOL: {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        role: 'admin',
-        token: JWT,
-        message: 'This admin is not associated with any schools',
-}
-
-============================================================ DONE
-SUCCESFUL RES FOR DONOR: {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        role: 'donor',
-        token: JWT,
-        donations: [{
-                id: 1,
-                amount: 50,
-                schoolID: 1,
-        }],
-}
-
-============================================================ DONE
-SUCCESFUL RES FOR DONOR YET TO DONATE: {
-        id: 1,
-        firstName: 'gabriel',
-        lastName: 'cabrejas',
-        email: 'gabcab@gmail.com',
-        role: 'donor',
-        token: JWT,
-        message: 'This donor is not associated with any donations',
-}
+```
