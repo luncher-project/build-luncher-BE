@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const urls = require('../../consts/urls');
 const errors = require('../../consts/errors');
+const responses = require('../../consts/responses');
 const Admin = require('./adminHandlers');
 const validateAdminToken = require('../credentials/middleware/validateAdminToken');
 const valdiateAdminUpdates = require('./middleware/validateAdminUpdates');
@@ -40,5 +41,35 @@ routes.put(
       });
   },
 );
+
+/*
+[DELETE] Remove admin and linked school
+Params: none,
+Body: none,
+Headers: Authorization: valid token.
+*/
+routes.delete(urls.admin, validateAdminToken, (req, res) => {
+  const id = req.decodedToken.subject;
+  Admin.findAdminByID(id)
+    .then(admin => {
+      delete admin.password;
+      admin.message = responses.deletedAdmin;
+      const deletedAdmin = admin;
+      removeAdmin(deletedAdmin);
+    })
+    .catch(err => {
+      res.status(500).json(errors.getAdmin);
+    });
+
+  const removeAdmin = deletedAdmin => {
+    Admin.removeAdmin(id)
+      .then(count => {
+        res.status(200).json(deletedAdmin);
+      })
+      .catch(err => {
+        res.status(500).json(errors.deleteAdmin);
+      });
+  };
+});
 
 module.exports = routes;

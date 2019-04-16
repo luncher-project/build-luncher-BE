@@ -13,15 +13,14 @@ Params: none,
 Body: none,
 */
 routes.get(urls.schools, (req, res) => {
-    Users
-    .getSchools()
+  Users.getSchools()
     .then(schools => {
-        res.status(200).json(schools)
+      res.status(200).json(schools);
     })
     .catch(err => {
-        res.status(500).json(errors.getSchools);
-    })
-})
+      res.status(500).json(errors.getSchools);
+    });
+});
 
 /*
 [GET] Get a single school by its id
@@ -29,16 +28,18 @@ Params: schoolID,
 Body: none,
 */
 routes.get(urls.schoolByID, (req, res) => {
-    const { id } = req.params;
-    Users
-    .getSchoolByID(id)
+  const { id } = req.params;
+  Users.getSchoolByID(id)
     .then(schools => {
-        res.status(200).json(schools)
+      if (schools) {
+        res.status(200).json(schools);
+      } else {
+        res.status(500).json(errors.noSchool);
+      }
     })
     .catch(err => {
-        res.status(500).json(errors.getSchools);
-    })
-})
-
+      res.status(500).json(errors.getSchools);
+    });
+});
 
 module.exports = routes;

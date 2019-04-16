@@ -54,10 +54,17 @@ const updateSchool = (adminID, schoolUpdates) => {
     });
 };
 
+const removeSchool = (adminID) => {
+  return db('schools')
+  .where({ adminID })
+  .del();
+}
+
 module.exports = {
   findSchoolByAdminID,
   findSchoolByAdminIDArr,
   addSchool,
   findAssociatedDonations,
   updateSchool,
+  removeSchool,
 };
