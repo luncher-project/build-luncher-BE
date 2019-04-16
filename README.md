@@ -220,7 +220,7 @@ SUCCESFUL RES FOR DONOR: {
         email: 'gabcab@gmail.com',
         role: 'donor',
         token: JWT,
-        donationIDs: [{
+        donations: [{
                 id: 1,
                 amount: 50,
                 schoolID: 1,

@@ -15,14 +15,16 @@ exports.up = function(knex, Promise) {
       .unsigned()
       .references('id')
       .inTable('users')
-      .onUpdate('CASCADE');
+      .onUpdate('CASCADE')
+      .onDelete('SET NULL');
 
       table
       .integer('schoolID')
       .unsigned()
       .references('id')
       .inTable('schools')
-      .onUpdate('CASCADE');
+      .onUpdate('CASCADE')
+      .onDelete('SET NULL');
     });
   };
   
