@@ -12,7 +12,7 @@ const validateUser = (req, res, next) => {
     ) {
       next();
     } else {
-        res.status(400).json(errors.invalidUser)
+        res.status(401).json(errors.invalidUser)
     }
   };
   
