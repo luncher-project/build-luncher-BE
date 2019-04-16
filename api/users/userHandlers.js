@@ -3,6 +3,7 @@ const db = require('../../config/knexConfig');
 const getSchools = () => {
   return db('schools')
     .select(
+      'schools.id',
       'schools.schoolName',
       'schools.state',
       'schools.zip',
