@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const urls = require('../../consts/urls');
 const errors = require('../../consts/errors');
+const responses = require('../../consts/responses');
 const Donor = require('./donorHandlers');
 const validateDonorToken = require('../credentials/middleware/validateDonorToken');
 const validateDonorUpdates = require('./middleware/validateDonorUpdates');
@@ -40,5 +41,35 @@ routes.put(
       });
   },
 );
+
+/*
+[DELETE] Remove donor
+Params: none,
+Body: none,
+Headers: Authorization: valid token.
+*/
+routes.delete(urls.donor, validateDonorToken, (req, res) => {
+  const id = req.decodedToken.subject;
+  Donor.findDonorByID(id)
+    .then(donor => {
+      delete donor.password;
+      donor.message = responses.deletedDonor;
+      const deletedDonor = donor;
+      removeDonor(deletedDonor);
+    })
+    .catch(err => {
+      res.status(500).json(errors.getDonor);
+    });
+
+  const removeDonor = deletedDonor => {
+    Donor.removeDonor(id)
+      .then(count => {
+        res.status(200).json(deletedDonor);
+      })
+      .catch(err => {
+        res.status(500).json(errors.deleteDonor);
+      });
+  };
+});
 
 module.exports = routes;

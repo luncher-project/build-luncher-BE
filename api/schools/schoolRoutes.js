@@ -103,4 +103,33 @@ routes.put(
   },
 );
 
+/*
+[DELETE] Remove school
+Params: none,
+Body: none,
+Headers: Authorization: valid token.
+*/
+routes.delete(urls.school, validateAdminToken, (req, res) => {
+  const id = req.decodedToken.subject;
+  School.findSchoolByAdminID(id)
+    .then(school => {
+      school.message = responses.deletedSchool;
+      const deletedSchool = school;
+      removeSchool(deletedSchool);
+    })
+    .catch(err => {
+      res.status(500).json(errors.getSchool);
+    });
+
+  const removeSchool = deletedSchool => {
+    School.removeSchool(id)
+      .then(count => {
+        res.status(200).json(deletedSchool);
+      })
+      .catch(err => {
+        res.status(500).json(errors.deleteSchool);
+      });
+  };
+});
+
 module.exports = routes;

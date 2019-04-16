@@ -5,12 +5,21 @@ const errors = {
   getSchool: {
     message: 'There was an error retrieving the school',
   },
+  getAdmin: {
+    message: 'There was an error retrieving the admin',
+  },
+  getDonor: {
+    message: 'There was an error retrieving the donor',
+  },
   invalidUser: {
     message:
       'Please provide a valid user with firstName, lastName, email, password, and role as per the API docs',
   },
   addUser: {
     message: 'The user could not be added to the database',
+  },
+  findUser: {
+    message: 'There was an error retrieving the user',
   },
   getEmails: {
     message: 'There was an error retrieving emails',
@@ -75,7 +84,16 @@ const errors = {
   }, 
   secondSchool: {
     message: 'This admin is already linked to a school, an admin can only be linked to one school at a time',
-  }
+  }, 
+  deleteAdmin: {
+    message: 'The admin could not be deleted',
+  },
+  deleteDonor: {
+    message: 'The donor could not be deleted',
+  },
+  deleteSchool: {
+    message: 'The school could not be deleted',
+  },
 };
 
 module.exports = errors;

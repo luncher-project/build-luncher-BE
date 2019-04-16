@@ -19,7 +19,14 @@ const updateDonor = (id, donorUpdates) => {
     });
 };
 
+const removeDonor = (id) => {
+  return db('users')
+  .where({ id })
+  .del();
+}
+
 module.exports = {
   findDonorByID,
   updateDonor,
+  removeDonor,
 };
