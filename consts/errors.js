@@ -5,6 +5,9 @@ const errors = {
   getSchool: {
     message: 'There was an error retrieving the school',
   },
+  noSchool: {
+    message: 'There is no school linked with this id',
+  },
   getAdmin: {
     message: 'There was an error retrieving the admin',
   },
