@@ -1,7 +1,7 @@
 # Luncher Backend
 
 # API
-All API requests are made to: (**need to add heorku domain once deployed**)
+All API requests are made to: https://luncher-backend.herokuapp.com
 
 # Test
 a **GET** request to /api will return a success message if the API is working and has been accessed correctly.
@@ -15,7 +15,7 @@ a **GET** request to /api will return a success message if the API is working an
 # Credentials
 
 ## Register
-a **POST** request to /api/register will create a new user(admin or donor) and return and object containing an authentication token.
+a **POST** request to /api/register will create a new user(admin or donor) and return an object containing an authentication token.
 
 ### Request
 ```
