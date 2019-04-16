@@ -1,9 +1,9 @@
-#Lunchr Backend
+# Lunchr Backend
 
-#API
+# API
 All API requests are made to:
 
-#Test
+# Test
 a **GET** request to /api will return a success message if the API is working and has been accessed correctly.
 ###Response
 ```
@@ -12,12 +12,12 @@ a **GET** request to /api will return a success message if the API is working an
 }
 ```
 
-#Credentials
+# Credentials
 
 ##Register
 a **POST** request to /api/register will create a new user(admin or donor) and return and object containing an authentication token.
 
-###Request
+### Request
 ```
 {
 	"firstName": "donald",
@@ -28,7 +28,7 @@ a **POST** request to /api/register will create a new user(admin or donor) and r
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 36,
@@ -41,10 +41,10 @@ a **POST** request to /api/register will create a new user(admin or donor) and r
 
 ```
 
-##Login
+## Login
 a **POST** request to /api/login will log in a user(admin or donor) and return an object containing an authentication token. For admins, the object will either contain a schoolID for which the admin is associated or a message to say the admin is linked to no schools. For donor, the object will either contain an array of donations that they have made or a message to say the donor has yet to make a donation.
 
-###Request
+### Request
 ```
 {
 	"email": "dand@gmail.com",
@@ -52,7 +52,7 @@ a **POST** request to /api/login will log in a user(admin or donor) and return a
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 1,
@@ -67,10 +67,10 @@ a **POST** request to /api/login will log in a user(admin or donor) and return a
 
 #Schools (no authentication required)
 
-##All schools
+## All schools
 a **GET** request to /api/schools will return a list of the schools seeking lunch funds.
 
-###Response
+### Response
 ```
 [
     {
@@ -90,15 +90,15 @@ a **GET** request to /api/schools will return a list of the schools seeking lunc
 ]
 ```
 
-##School by ID
+## School by ID
 a **GET** request to /api/schools/:id will return the school linked with the id provided in params.
 
-###Request
+### Request
 ```
 /api/schools/1
 ```
 
-###Response
+### Response
 ```
 {
     "schoolName": "Marion-Sterling Elementary School",
@@ -109,20 +109,20 @@ a **GET** request to /api/schools/:id will return the school linked with the id 
 }
 ```
 
-#Admins
+# Admins
 Admin requests that contain a valid token in their Authentication header will be accepteed.
 
-##Update an admin
+## Update an admin
 a **PUT** request to /api/admin with a valid token in the Authentication header will return an object of a newly updated admin.
 
-###Request
+### Request
 ```
 {
 	"lastName": "armstrong"
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 1,
@@ -136,7 +136,7 @@ a **PUT** request to /api/admin with a valid token in the Authentication header 
 ##Delete an admin
 a **DELETE** request to /api/admin with a valid token in the Authentication header will return an object of the deleted admin. Deleting an admin will delete a linked school and will remove any existing links between donations previously made to that school and the school itself.
 
-###Response
+### Response
 ```
 {
     "id": 1,
@@ -147,10 +147,10 @@ a **DELETE** request to /api/admin with a valid token in the Authentication head
 }
 ```
 
-##School associated with admin
+## School associated with admin
 a **GET** request to /api/admin/school with a valid token in the Authentication header will return a school object if the admin has created a school and a message to say there are no linked schools otherwise. The school object will contain an array of associated donations and a message to say no donations are associated with the school otherwise.
 
-###Response
+### Response
 ```
 {
     "id": 1,
@@ -164,10 +164,10 @@ a **GET** request to /api/admin/school with a valid token in the Authentication 
 }
 ```
 
-##Add a school
+## Add a school
 a **POST** request to /api/admin/school with a valid token in the Authentication header will return an object of a newly added school if the admin is not already tied to a school. Admins may not be associated with multiple schools.
 
-###Request
+### Request
 ```
 {
 	"schoolName": "Calhan Public School",
@@ -177,7 +177,7 @@ a **POST** request to /api/admin/school with a valid token in the Authentication
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 2,
@@ -190,17 +190,17 @@ a **POST** request to /api/admin/school with a valid token in the Authentication
 }
 ```
 
-##Update a school
+## Update a school
 a **PUT** request to /api/admin/school with a valid token in the Authentication header will return an object of a newly updated school.
 
-###Request
+### Request
 ```
 {
 	"schoolName": "Calhan Public  Schools"
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 2,
@@ -214,10 +214,10 @@ a **PUT** request to /api/admin/school with a valid token in the Authentication 
 ```
 
 
-##Delete a school
+## Delete a school
 a **DELETE** request to /api/admin/school with a valid token in the Authentication header will return an object of the deleted school. Deleting a school will remove any existing links between donations previously made to that school and the school itself.
 
-###Response
+### Response
 ```
 {
     "id": 2,
@@ -234,17 +234,17 @@ a **DELETE** request to /api/admin/school with a valid token in the Authenticati
 #Donors
 Donor requests that contain a valid token in their Authentication header will be accepteed.
 
-##Update a donor
+## Update a donor
 a **PUT** request to /api/donor with a valid token in the Authentication header will return an object of a newly updated donor.
 
-###Request
+### Request
 ```
 {
 	"lastName":  "Artinger"
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 3,
@@ -255,10 +255,10 @@ a **PUT** request to /api/donor with a valid token in the Authentication header 
 }
 ```
 
-##Delete a donor
+## Delete a donor
 a **DELETE** request to /api/donor with a valid token in the Authentication header will return an object of the deleted donor. Deleting a donor will remove any existing links between donations previously made by that donor and the donations they have made.
 
-###Response
+### Response
 ```
 {
     "id": 3,
@@ -270,13 +270,13 @@ a **DELETE** request to /api/donor with a valid token in the Authentication head
 }
 ```
 
-#Donations
+# Donations
 Donor requests that contain a valid token linked to a donor in their Authentication header will be accepteed.
 
 ##Update a donor
 a **POST** request to /api/donation/:id with a valid token in the Authentication header and an id of an existing school in the params will return an object the information on the donation and the associated schools funds.
 
-###Request
+### Request
 ```
 /api/donation/1
 {
@@ -284,7 +284,7 @@ a **POST** request to /api/donation/:id with a valid token in the Authentication
 }
 ```
 
-###Response
+### Response
 ```
 {
     "id": 1,
@@ -302,10 +302,10 @@ a **POST** request to /api/donation/:id with a valid token in the Authentication
 ```
 
 
-#Errors
+# Errors
 all errors are return in the form of an object with a message key and note on the specific issue.
 
-###Response
+### Response
 ```
 {
     message: 'There was an error checking whether this admin is already linked to  a school',
