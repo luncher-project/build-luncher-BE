@@ -1,4 +1,4 @@
-# Lunchr Backend
+# Luncher Backend
 
 # API
 All API requests are made to: (**need to add heorku domain once deployed**)
