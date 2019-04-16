@@ -5,7 +5,7 @@ All API requests are made to: (**need to add heorku domain once deployed**)
 
 # Test
 a **GET** request to /api will return a success message if the API is working and has been accessed correctly.
-###Response
+### Response
 ```
 {
     api: 'up',
@@ -14,7 +14,7 @@ a **GET** request to /api will return a success message if the API is working an
 
 # Credentials
 
-##Register
+## Register
 a **POST** request to /api/register will create a new user(admin or donor) and return and object containing an authentication token.
 
 ### Request
