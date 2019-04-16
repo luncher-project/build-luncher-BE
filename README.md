@@ -1,7 +1,7 @@
 # Lunchr Backend
 
 # API
-All API requests are made to:
+All API requests are made to: (**need to add heorku domain once deployed**)
 
 # Test
 a **GET** request to /api will return a success message if the API is working and has been accessed correctly.
