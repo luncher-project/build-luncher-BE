@@ -305,7 +305,7 @@ a **POST** request to /api/donation/:id with a valid token in the Authentication
 
 
 # Errors
-all errors are return in the form of an object with a message key and note on the specific issue.
+all errors are returned in the form of an object with a message key and a note on the specific issue.
 
 ### Response
 ```
