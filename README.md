@@ -67,6 +67,8 @@ a **POST** request to /api/login will log in a user(admin or donor) and return a
 
 #Schools (no authentication required)
 
+# Schools
+
 ## All schools
 a **GET** request to /api/schools will return a list of the schools seeking lunch funds.
 
