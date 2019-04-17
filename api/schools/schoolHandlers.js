@@ -32,14 +32,11 @@ const findSchoolById = id => {
 const findAssociatedDonations = schoolID => {
   return db('donations')
     .select(
-      'donations.id as donationID',
-      'donations.created_at as date',
-      'donations.amount',
-      'users.email as donorContact',
+      'id as donationID',
+      'created_at as date',
+      'amount',
     )
-    .where({ schoolID })
-    .from('donations')
-    .innerJoin('users', 'donations.donorID', 'users.id');
+    .where({ schoolID });
 };
 
 const updateSchool = (adminID, schoolUpdates) => {
