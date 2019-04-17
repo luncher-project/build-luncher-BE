@@ -135,7 +135,7 @@ a **PUT** request to /api/admin with a valid token in the Authentication header 
 }
 ```
 
-##Delete an admin
+## Delete an admin
 a **DELETE** request to /api/admin with a valid token in the Authentication header will return an object of the deleted admin. Deleting an admin will delete a linked school and will remove any existing links between donations previously made to that school and the school itself.
 
 ### Response
@@ -233,7 +233,7 @@ a **DELETE** request to /api/admin/school with a valid token in the Authenticati
 }
 ```
 
-#Donors
+# Donors
 Donor requests that contain a valid token in their Authentication header will be accepteed.
 
 ## Update a donor
