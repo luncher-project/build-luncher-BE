@@ -275,7 +275,7 @@ a **DELETE** request to /api/donor with a valid token in the Authentication head
 # Donations
 Donor requests that contain a valid token linked to a donor in their Authentication header will be accepteed.
 
-##Update a donor
+## Update a donor
 a **POST** request to /api/donation/:id with a valid token in the Authentication header and an id of an existing school in the params will return an object the information on the donation and the associated schools funds.
 
 ### Request
