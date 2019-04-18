@@ -1,10 +1,12 @@
 const request = require('supertest');
 
+const db = require('../../config/knexConfig');
 const server = require('../server');
 const generateToken = require('../auth/generateToken');
 const urls = require('../../consts/urls');
 const school = require('../../consts/test-specific/school');
 const users = require('../../consts/test-specific/users');
+const newSchool = require('../../consts/test-specific/newSchool')
 const errors = require('../../consts/errors');
 
 describe('schoolRoutes', () => {
@@ -52,12 +54,71 @@ describe('schoolRoutes', () => {
         .expect(errors.noSchoolAssociated);
     });
     it('returns the school affiliated with an admin where the admin has created a school', () => {
-        const affiliatedUser = users[0];
-        const token = generateToken(affiliatedUser);
-        return request(server)
-          .get(urls.school)
-          .set('Authorization', token)
-          .expect(school);
-      });
+      const affiliatedUser = users[0];
+      const token = generateToken(affiliatedUser);
+      return request(server)
+        .get(urls.school)
+        .set('Authorization', token)
+        .expect(school);
+    });
+  });
+  describe(`[POST] ${urls.schools}`, () => {
+    it('returns a status code of 400 when an incomplete body is passed', () => {
+      const admin = users[18];
+      const token = generateToken(admin);
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .send({ schoolName: 'testing high' })
+        .expect(400);
+    });
+    it('returns the expected error when an incomplete body is passed', () => {
+      const admin = users[18];
+      const token = generateToken(admin);
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .send({ schoolName: 'testing high' })
+        .expect(errors.invalidSchool);
+    });
+    it('returns a status code of 400 when an admin already linked to a school tries to add a new one', () => {
+      const admin = users[0];
+      const token = generateToken(admin);
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .expect(400);
+    });
+    it('returns the expected error when an admin already linked to a school tries to add a new one', () => {
+      const admin = users[0];
+      const token = generateToken(admin);
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .expect(errors.secondSchool);
+    });
+    it('returns a status code of 201 when an unlinked admin passes a valid body', () => {
+      const admin = users[18];
+      const token = generateToken(admin);
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .send(newSchool)
+        .expect(201);
+    });
+    it('returns the expected school body when an unlinked admin passes a valid body', () => {
+      const admin = users[18];
+      const token = generateToken(admin);
+      const expectedSchool = newSchool;
+      expectedSchool.id = 19;
+      expectedSchool.fundsReceived = 0;
+      expectedSchool.adminID = 18;
+      return request(server)
+        .post(urls.school)
+        .set('Authorization', token)
+        .send(newSchool)
+        .expect(expectedSchool);
+    });
   });
 });
+

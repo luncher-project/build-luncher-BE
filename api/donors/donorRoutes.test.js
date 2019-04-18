@@ -5,7 +5,6 @@ const generateToken = require('../auth/generateToken');
 const urls = require('../../consts/urls');
 const users = require('../../consts/test-specific/users');
 const errors = require('../../consts/errors');
-const responses = require('../../consts/responses');
 
 describe('userRoutes', () => {
   describe(`[PUT] ${urls.donor}`, () => {
@@ -54,7 +53,7 @@ describe('userRoutes', () => {
         .expect(errors.invalidDonorUpdate);
     });
     it('returns a status code of 200 when a valid update is requested', () => {
-      const donor = users[21];
+      const donor = users[29];
       const token = generateToken(donor);
       return request(server)
         .put(urls.donor)
@@ -63,7 +62,7 @@ describe('userRoutes', () => {
         .expect(200);
     });
     it('returns the expected user object when a valid update is requested', () => {
-      const donor = users[21];
+      const donor = users[29];
       const token = generateToken(donor);
       const lastNameTest = 'Test';
       const expectedDonor = donor;
