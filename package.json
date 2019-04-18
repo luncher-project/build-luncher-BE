@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watchAll -- verbose"
+    "test": "cross-env JWT_SECRET=test DB_ENV=testing jest --watchAll -- verbose"
   },
   "engines": {
     "node": "10.15.0"
