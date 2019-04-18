@@ -2,7 +2,7 @@ const request = require('supertest');
 
 const server = require('../server');
 const urls = require('../../consts/urls');
-const schools = require('../../consts/schools');
+const schools = require('../../consts/test-specific/schools');
 const errors = require('../../consts/errors');
 
 describe('userRoutes', () => {

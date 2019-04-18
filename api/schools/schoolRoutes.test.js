@@ -4,7 +4,7 @@ const server = require('../server');
 const generateToken = require('../auth/generateToken');
 const urls = require('../../consts/urls');
 const school = require('../../consts/test-specific/school');
-const users = require('../../consts/users');
+const users = require('../../consts/test-specific/users');
 const errors = require('../../consts/errors');
 
 describe('schoolRoutes', () => {
@@ -18,6 +18,22 @@ describe('schoolRoutes', () => {
       return request(server)
         .get(urls.school)
         .expect(errors.noToken);
+    });
+    it('returns a status code of 401 when a donor token is sent in Authorization header', () => {
+      const donor = users[29];
+      const token = generateToken(donor);
+      return request(server)
+        .get(urls.school)
+        .set('Authorization', token)
+        .expect(400);
+    });
+    it('returns the expected error when a donor token is sent in Authorization header', () => {
+      const donor = users[29];
+      const token = generateToken(donor);
+      return request(server)
+        .get(urls.school)
+        .set('Authorization', token)
+        .expect(errors.invalidCredentials);
     });
     it('returns a status code of 200 when a token is sent', () => {
       const unafilliatedUser = users[19];
