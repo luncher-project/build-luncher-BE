@@ -34,7 +34,7 @@ routes.get(urls.schoolByID, (req, res) => {
       if (schools) {
         res.status(200).json(schools);
       } else {
-        res.status(500).json(errors.noSchool);
+        res.status(400).json(errors.noSchool);
       }
     })
     .catch(err => {
