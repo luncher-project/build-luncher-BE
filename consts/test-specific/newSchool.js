@@ -1,8 +1,18 @@
 const newSchool = {
-    schoolName: "Testing High School",
-    state: 'co',
-    zip: 50000,
-    fundsNeeded: 600
-}
+  schoolName: 'Testing High School',
+  state: 'CO',
+  zip: 50000,
+  fundsNeeded: 600,
+};
 
-module.exports = newSchool;
+const newSchoolReturn = {
+  id: 1,
+  schoolName: 'Testing High School',
+  state: 'CO',
+  zip: 50000,
+  fundsNeeded: 600,
+  fundsReceived: 0,
+  adminID: 19
+};
+
+module.exports = { newSchool, newSchoolReturn };

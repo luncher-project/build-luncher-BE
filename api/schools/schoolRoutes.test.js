@@ -6,10 +6,13 @@ const generateToken = require('../auth/generateToken');
 const urls = require('../../consts/urls');
 const school = require('../../consts/test-specific/school');
 const users = require('../../consts/test-specific/users');
-const newSchool = require('../../consts/test-specific/newSchool')
+const schoolTest = require('../../consts/test-specific/newSchool');
 const errors = require('../../consts/errors');
 
 describe('schoolRoutes', () => {
+  afterEach(async () => {
+    await db('schools').truncate();
+  });
   describe(`[GET] ${urls.school}`, () => {
     it('returns a status code of 401 when no token is sent in Authorization header', () => {
       return request(server)
@@ -64,7 +67,7 @@ describe('schoolRoutes', () => {
   });
   describe(`[POST] ${urls.schools}`, () => {
     it('returns a status code of 400 when an incomplete body is passed', () => {
-      const admin = users[18];
+      const admin = users[19];
       const token = generateToken(admin);
       return request(server)
         .post(urls.school)
@@ -95,6 +98,7 @@ describe('schoolRoutes', () => {
       return request(server)
         .post(urls.school)
         .set('Authorization', token)
+        .send(schoolTest.newSchool)
         .expect(errors.secondSchool);
     });
     it('returns a status code of 201 when an unlinked admin passes a valid body', () => {
@@ -103,22 +107,18 @@ describe('schoolRoutes', () => {
       return request(server)
         .post(urls.school)
         .set('Authorization', token)
-        .send(newSchool)
+        .send(schoolTest.newSchool)
         .expect(201);
     });
     it('returns the expected school body when an unlinked admin passes a valid body', () => {
       const admin = users[18];
       const token = generateToken(admin);
-      const expectedSchool = newSchool;
-      expectedSchool.id = 19;
-      expectedSchool.fundsReceived = 0;
-      expectedSchool.adminID = 18;
+      const expectedSchool = schoolTest.newSchoolReturn;
       return request(server)
         .post(urls.school)
         .set('Authorization', token)
-        .send(newSchool)
+        .send(schoolTest.newSchool)
         .expect(expectedSchool);
     });
   });
 });
-
