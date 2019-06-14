@@ -1,4 +1,14 @@
-## Luncher Backend
+# Luncher Backend
+
+## Motivation
+Luncher is a desktop web application which was built as part of a team comprising of one frontend and one backend developer. This piece comprises of the backend portion which was used to practise building a Node server in Express.
+
+## About The App
+This app aims to unite donors with underfunded schools so that less privileged children can be provided with free schoool meals.
+
+
+## Technologoies
+Node | Express | Jest | Supertest
 
 ## API
 All API requests are made to: https://luncher-backend.herokuapp.com
