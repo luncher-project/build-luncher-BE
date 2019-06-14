@@ -12,7 +12,7 @@ a **GET** request to /api will return a success message if the API is working an
 }
 ```
 
-# Credentials
+## Credentials
 
 ### Register
 a **POST** request to /api/register will create a new user(admin or donor) and return an object containing an authentication token.
