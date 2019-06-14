@@ -1,7 +1,7 @@
 # Luncher Backend
 
 ## Motivation
-Luncher is a desktop web application which was built as part of a team comprising of one frontend and one backend developer. This piece comprises of the backend portion which was used to practise building a Node server in Express.
+Luncher is a desktop web application which was built as part of a team comprising of one frontend and one backend developer. This is the backend portion which was used to practise building out a Node server in Express.
 
 ## About The App
 This app aims to unite donors with underfunded schools so that less privileged children can be provided with free schoool meals.
